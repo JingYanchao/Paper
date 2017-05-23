@@ -482,7 +482,6 @@ Noff uses google Tcmalloc to optimize the memeory copy performance. The Tcmalloc
 The Tcmalloc assigns each thread a thread-local cache. Small allocations are satisfied from the thread-local cache. 
 Objects are moved from central data structures into a thread-local cache as needed, and periodic garbage collections are used to migrate memory back from a thread-local cache into the central data structures. 
 
-\subsection{Parallel Processing}
 
 
 \subsubsection{Subsubsection Heading Here}
