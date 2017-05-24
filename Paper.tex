@@ -483,6 +483,8 @@ The Tcmalloc assigns each thread a thread-local cache. Small allocations are sat
 Objects are moved from central data structures into a thread-local cache as needed, and periodic garbage collections are used to migrate memory back from a thread-local cache into the central data structures. 
 
 \subsection{Parallel Processing}
+Noff offers two kinds of multi-thread platforms which inherent support for multi-core systems.the two kinds are all
+achieved by transparently creating a number of worker threads for
 
 
 \subsubsection{Subsubsection Heading Here}
