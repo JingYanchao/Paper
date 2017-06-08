@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2016.9.15)  7 JUN 2017 20:35
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2016.9.15)  8 JUN 2017 20:18
 entering extended mode
 **Paper.tex
 (G:\git-project\Paper\Paper.tex
@@ -192,7 +192,12 @@ Requested font "ptmbi7t" at 24.0pt
 \IEEEPARstartletwidth=\dimen125
 \c@IEEEbiography=\count94
 \@IEEEtranrubishbin=\box27
-) (E:\CTEX\UserData\tex\latex\listings\listings.sty
+) (E:\CTEX\UserData\tex\latex\cite\cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(E:\CTEX\UserData\tex\latex\listings\listings.sty
 (E:\CTEX\MiKTeX\tex\latex\graphics\keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks15
@@ -281,31 +286,25 @@ Requested font "ptmrc7t" at 10.0pt
 File: ./picture/Figure1.jpg Graphic file (type QTm)
  <use  "./picture/Figure1.jpg" >
 File: ./picture/Figure2.jpg Graphic file (type QTm)
- <use  "./picture/Figure2.jpg" >
+ <use  "./picture/Figure2.jpg" > [2]
 File: ./picture/Figure3.jpg Graphic file (type QTm)
 
 <use  "./picture/Figure3.jpg" >
-Overfull \hbox (6.0pt too wide) in paragraph at lines 487--488
+Overfull \hbox (6.0pt too wide) in paragraph at lines 485--486
  [][] 
  []
 
-[2]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 495.
+(Font)              <7> on input line 493.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 495.
-
-Underfull \hbox (badness 3199) in paragraph at lines 495--496
-[]\OT1/ptm/m/n/10 Figure 4[] dis-plays the nu-cle-us func-tion-s of cap-ture.
- []
-
+(Font)              <5> on input line 493.
 (E:\CTEX\UserData\tex\latex\listings\lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (E:\CTEX\UserData\tex\latex\listings\lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 499.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 496.
 
 
 (E:\CTEX\MiKTeX\tex\latex\psnfss\ot1pcr.fd
@@ -345,30 +344,30 @@ File: ./picture/Figure14.jpg Graphic file (type QTm)
 <use  "./picture/Figure14.jpg" >
 File: ./picture/Figure15.jpg Graphic file (type QTm)
  <use  "./picture/Figure15.jpg" > [7]
-Underfull \hbox (badness 1838) in paragraph at lines 833--834
+Underfull \hbox (badness 1838) in paragraph at lines 829--830
 \OT1/ptm/m/n/10 Peng.He has of-fered huge con-tri-bu-tion to this re-search
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 880--881
+Underfull \hbox (badness 10000) in paragraph at lines 879--880
 []\OT1/ptm/m/n/8 J. E-van-s. S-cal-able mem-o-ry al-lo-ca-tion us-ing je-mal-lo
 c. 2011.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 880--881
+Underfull \hbox (badness 10000) in paragraph at lines 879--880
 \OT1/ptm/m/n/8 http://www.facebook.com/notes/facebook-engineering/scalable-memo
 ry-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 901--902
+Underfull \hbox (badness 10000) in paragraph at lines 900--901
 []\OT1/ptm/m/n/8 S. M-c-Canne, C. Leres, and V. Ja-cob-son. Libp-cap.
  []
 
 Missing character: There is no – in font ptmr7t!
 
-Underfull \hbox (badness 3219) in paragraph at lines 916--917
+Underfull \hbox (badness 3219) in paragraph at lines 913--914
 []\OT1/ptm/m/n/8 J. No-vak and S. S-turges. Target-Based TCP Stream Re-assem-
  []
 
@@ -385,12 +384,12 @@ Before submitting the final camera ready copy, remember to:
 
 [8] (G:\git-project\Paper\Paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3308 strings out of 430478
- 48813 string characters out of 3191502
- 143603 words of memory out of 3000000
- 6455 multiletter control sequences out of 15000+200000
+ 3394 strings out of 430478
+ 49845 string characters out of 3191502
+ 143376 words of memory out of 3000000
+ 6539 multiletter control sequences out of 15000+200000
  25572 words of font info for 56 fonts, out of 3000000 for 9000
  17 hyphenation exceptions out of 8191
- 26i,9n,51p,1082b,1475s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 26i,9n,51p,1088b,1039s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on Paper.pdf (8 pages).

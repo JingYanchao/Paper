@@ -88,7 +88,7 @@
 
 % *** CITATION PACKAGES ***
 %
-%\usepackage{cite}
+\usepackage{cite}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 % \cite{} output to follow that of the IEEE. Loading the cite package will
@@ -409,17 +409,17 @@ The abstract goes here.
 
 \section{Introduction}
 % no \IEEEPARstart
-Nowadays the demand for quality of service (Qos) and network security including policy-based routing,firewall and virtual private network(VPN) is ever-increasing\cite{IEEE:1},In order to satisfy the requirement,An in-depth understanding of the Internet traffic profile is needed.Accordingly, the deep packet inspection(DPI) becomes a crucial hot technology\cite{IEEE:2}.In a nutshell,a DPI system Firstly has to collect packets from the network interface cards(NIC),then to create a data structure to represent the incoming packets as network flows and then to forward or store the received packets for further processing.So it is extremely important to capture all exchanged packets between end-systems on the monitored link in very high speed links (e.g. multiple Gbps).\cite{IEEE:2}.Many DPI applications deeply rely on information from the network packets.Therefore a high-performance easy-use network traffic capture library is extremely required.
-\newline\indent Recently, For high-performance,enormous relative theoretical methods and tools have been proposed such as zero-copy technology, multi-core capture,multi-thread method and FPGA tools\cite{IEEE:3} and so on. This paper mainly focuses on software optimization.
-The zero-copy and multi-core technology can help avoid sparse sampling\cite{IEEE:4}.A renowned tool to accomplish zero-copy is PF\_RING\cite{IEEE:5}.The PF\_RING kernel module runs as a software interrupt handler that stores incoming packets to a memory-mapped buffer,shared with user-level stub.For multi-core technology,there are also various multi-thread proposed methods that can improve the entire performance.
+Nowadays the demand for quality of service (Qos) and network security including policy-based routing,firewall and virtual private network(VPN) is ever-increasing\cite{Liu},In order to satisfy the requirement,An in-depth understanding of the Internet traffic profile is needed.Accordingly, the deep packet inspection(DPI) becomes a crucial hot technology\cite{Antonello}.In a nutshell,a DPI system Firstly has to collect packets from the network interface cards(NIC),then to create a data structure to represent the incoming packets as network flows and then to forward or store the received packets for further processing.So it is extremely necessary to capture all exchanged packets between end-systems on the monitored link in very high speed links (e.g. multiple Gbps).\cite{Antonello}.Many DPI applications deeply rely on information from the network packets.Therefore a high-performance easy-use network traffic capture library is extremely required.
+\newline\indent Recently, For high-performance,enormous relative theoretical methods and tools have been proposed such as zero-copy technology, multi-core capture,multi-thread method and FPGA tools\cite{Qiao} and so on. This paper mainly focuses on software optimization.
+The zero-copy and multi-core technology can help avoid sparse sampling\cite{Ali}.A renowned tool to accomplish zero-copy is PF\_RING\cite{PFRING}.The PF\_RING kernel module runs as a software interrupt handler that stores incoming packets to a memory-mapped buffer,shared with user-level stub.For multi-core technology,there are also various multi-thread proposed methods that can improve the entire performance.
 The key of multi-thread is to make the best of multi-core performance.
-\newline\indent Although there are many kinds of theoretical technologies, there is hardly a flexible high-performance network traffic library. In this situation, developing a strong DPI application becomes a huge challenge.
-\newline\indent To overcome this difficulty, in this paper we present a network traffic library(noff),a high-performance passive network traffic monitoring framework.Noff provides the high-level functions needed by many monitoring applications and provide a quite flexible framework to adjust the system structure .Application developers can easily create magic high-level applications based on noff.
+\newline\indent Although there are many kinds of theoretical technologies, there is hardly a flexible high-performance network traffic library. Under such conditions, developing a strong DPI application becomes a huge challenge.
+\newline\indent To overcome this difficulty, in this paper we present a parallel network traffic library(noff),a high-performance passive network traffic monitoring framework.Noff provides the high-level functions needed by many monitoring applications and provide a quite flexible framework to adjust the system structure .Application developers can easily create magic high-level applications based on noff.
 \newline\indent To acquire aggressive performance optimization, we use a flexible multi-thread structure which can make the best of the multi-core performance to achieve a high throughput.
-\newline\indent To reduce the overhead of unnecessary memory copying.Noff uses the PF\_RING as underlying kernel component. The subzero packet copy scheme of PF\_RING can contribute to reduce the total overhead and noff also uses the TCMalloc\cite{IEEE:6}\cite{IEEE:8} framework to reduce the memory allocation frequency.Meanwhile,noff adopts some novel techniques to reduce the overload of thread synchronization. 
+\newline\indent To reduce the overhead of unnecessary memory copying.Noff uses the PF\_RING as underlying kernel component. The subzero packet copy scheme of PF\_RING can contribute to reduce the total overhead and noff also uses the TCMalloc\cite{Evans}\cite{Sangho} framework to reduce the memory allocation frequency.Meanwhile,noff adopts some novel techniques to reduce the overhead of thread synchronization. 
 \newline\indent To accommodate heavy loads, noff introduces the notion of Least Recently Used (LRU) stream management algorithm.Under heavy load,traditional monitoring systems usually drop arriving packets in a random way, which would severely affect the following stream reassembly process.Noff always drop the dead stream which has no data exchange during a long time.This method can relatively reduce the impacts from dropping streams.
-\newline\indent Noff also provides a flexible and expressive application programming interface that allows programmers to develop many kinds of interesting traffic applications.Our design introduces two novel features:(\uppercase\expandafter{\romannumeral1}) Noff use the C++ bind and function features to design callback interfaces between two modules.Programmers can flexibly add new modules or change modules just through main configure file. And(\uppercase\expandafter{\romannumeral2})it offers more control for tolerating packet loss under high load throughput. And noff also supports single queue NIC multi-thread scaling and multiple queue based on RSS(receive-side scaling)\cite{IEEE:9} transparent parallelization of stream processing simultaneously.
-\newline\indent We have evaluated noff in a 10GbE environment using real campus traffic and showed that it outperforms existing alternatives like Libnids and Snort's[] stream5 processor in a variety of scopes.For example,our results demonstrate that noff can capture and deliver all streams with lower CPU utilization.
+\newline\indent Noff also provides a flexible and expressive application programming interface that allows programmers to develop many kinds of interesting traffic applications.Our design introduces two novel features:(\uppercase\expandafter{\romannumeral1}) Noff uses the C++ bind and function features to design callback interfaces between two modules.Programmers can flexibly add new modules or change modules just through main configure file. And(\uppercase\expandafter{\romannumeral2})it offers more control for tolerating packet loss under high load throughput. And noff also supports single queue NIC's multi-thread scaling and multiple queue based on RSS(receive-side scaling)\cite{Server} transparent parallelization of stream processing simultaneously.
+\newline\indent We have evaluated noff in a 10GbE environment using real campus traffic and showed that it outperforms existing alternatives like Libnids and Snort's\cite{snort} stream5 processor in a variety of scopes.For example,our results demonstrate that noff can capture and deliver all streams with lower CPU utilization.
 The main contributions of this paper are:
 \newline 1.We propose noff, which is an universal network traffic library.It provides a flexible and aggressive software framework to offer programmers an easy-use platform to develop network plug-in compartments.
 \newline 2.We introduce some applied software techniques to optimize traditional products and approaches.Through these techniques,noff can deliver transport-layer streams for higher traffic rates than previous approaches.
@@ -433,48 +433,46 @@ The design of noff focuses attention on two key objectives: structure flexibilit
 \subsection{Flexble Module Framework and Interface}
 
 Noff adopts a novel callback module interface which is based on the function template feature of C++. Noff is composed of several modules.
-These modules can be structured into several parts according to functionality or logical structure. the logical structure of noff includes capturer,dispatcher,IP,TCP,UDP,application and so on,which is correspond to the TCP/IP network model.Each layer will offer one or more callback interface to many upper layer modules. Programmers can build their modules on lower layer modules without changing any existing code.Furthermore, noff can selectively assemble different modules into a same layer to adapt to different demands.
+These modules can be structured into several parts according to functionality or logical structure. The logical structure of noff includes capturer,dispatcher,IP,TCP,UDP,application and so on,which is correspond to the TCP/IP network model.Each layer will offer one or more callback interface to many upper layer modules. Programmers can build their modules on lower layer modules without changing any existing code.Furthermore, noff can selectively assemble different modules into a same layer to adapt to different demands.
 
 \subsection{PF\_RING Patch}
 PF\_RING is a new type of network socket that dramatically improves the packet capture speed.It uses User-space ZC (new generation DNA, Direct NIC Access) drivers for extreme packet capture transmission speed as the NIC NPU (Network Process Unit) is pushing getting packets to user land without any kernel intervention. 
 Noff uses PF\_RING as the kernel driver and can thus arrive more aggressive runtime speed.
 
 \subsection{LRU Scheme}
-Noff introduces Least Recently Used(LRU) stream algorithm which enable the system to control its resources effectively during overload. This algorithm can resolve the problem that sudden traffic bursts or overload conditions may force the packet capturing subsystem to fill up its buffers and randomly drop streams in a haphazard manner.Noff maintains a novel timer data structure:timing wheel\cite{IEEE:10}which store the streams into different buckets by the time gap.Timing wheel would drop the streams which have been silent for at least one minute.In this way,the new stream will be accommodated with a higher probability.Programmers can also force to maintain some priority streams by updating the timestamp of those streams.The detail implementation of timing wheel would be described in the implementation section.
+Noff has proposed Least Recently Used(LRU):a stream algorithm which enable the system to control its resources effectively during overload. This algorithm can resolve the problem that sudden traffic bursts or overload conditions may force the packet capturing subsystem to fill up its buffers and randomly drop streams in a haphazard manner.In order to arrive this requirment,noff maintains a novel timer data structure:timing wheel\cite{Varghese}which store the streams into different buckets by the time gap.Timing wheel would drop the streams which have been silent for at least one minute.In this way,the new stream will be accommodated with a higher probability.Besides,Programmers can also force to maintain some priority streams by updating the timestamp of those streams.The detail implementation of timing wheel would be described in the implementation section.
 
 \subsection{Flexible Stream Reassembly}
-Libnids\cite{IEEE:11} has accomplished its TCP reassembly machine by simplifying the Linux network stack. However,the callback interface of libnids is a little poor and
+Libnids\cite{Libnids} has accomplished its TCP reassembly machine by simplifying the Linux network stack. However,the callback interface of libnids is a little poor and
 it has no ability to cope with the connection abnormity because of none timer. Noff adds a passive keep-alive timer to close the dead abnormal connection when
-a stream connection has no data interaction during a long time. Noff also abandon the TCP memory buffer which is used by libnids to reduce memory copy overhead. Besides,noff reserves nearly all of the other functions of libnids.
+a stream connection has no data interaction during a long time. Noff also abandons the TCP memory buffer in libnids to reduce memory copy overhead. Besides,noff reserves nearly all of the other functions of libnids.
 
 \subsection{Memory Allocations Optimization}
-Noff uses TCMalloc\cite{IEEE:7}\cite{IEEE:8} to optimize the memory copy performance. The TCMalloc implementation takes approximately 50 nanoseconds for the same operation pair when PTMalloc2 takes approximately 300.
-The TCMalloc assigns each thread a thread-local cache. Small allocations are satisfied from the thread-local cache. 
-Objects are moved from central data structures into a thread-local cache as needed, and periodic garbage collections are used to migrate memory back from a thread-local cache into the central data structures. 
-\newline\indent Noff also uses smart pointer to manage stream objects which is memory safe.
+On the one hand,Noff uses TCMalloc\cite{Threading}\cite{Sangho} to optimize the memory copy performance. The TCMalloc implementation performs better than the traditional tools.TCMalloc assigns each thread a thread-local cache. Small allocations are satisfied from the thread-local cache. when a cache is insufficient,memories are moved from central data structures into the thread-local cache as needed, and periodic garbage collections are used to migrate memory back from a thread-local cache into the central data structures ,which clearly reduce the frequency of memory allocation.
+\newline\indent On the other hand,Noff also uses smart pointer to manage objects to enhance the security of memory management.
 
 \subsection{Parallel Processing}
-Noff offers two kinds of multi-thread platforms which inherent support for multi-core systems.the two kinds are all achieved by transparently creating a number of worker threads for user-level stream processing equal to the number the available cores.The mapping of threads to CPU cores is partically one-to-one. 
-\newline\indent To balance the network traffic load across multiple NIC queues and cores, Scap\cite{IEEE:12} uses kernel based approach such as Receive Side Scaling (RSS)\cite{IEEE:9}to process balance a lot number of packets. Actually,when the NIC supports multiple queue, Our noff could use RSS to assign one stream to a corresponding thread equably.Otherwise,noff could even use customized load balancer to process each stream.
+Noff offers two kinds of multi-thread platforms which inherent support for multi-core systems.The two kinds are all achieved by transparently creating a number of worker threads for user-level stream processing the number of those threads is equal to the number the available cores.All processing of a particular stream is done on the same core, reducing,in this way, context switches, cache misses, and interthread synchronization operations.
+\newline\indent To balance the network traffic load across multiple NIC queues and cores, Scap\cite{Papadogiannakis} uses kernel based approach such as Receive Side Scaling (RSS)\cite{Server}to process balance a lot number of packets.While,in our implementation,when the NIC supports multiple queue,noff could use RSS to assign one stream to a corresponding thread equably.Otherwise,noff could even use customized load balancer to assign each stream.
 
 \section{Architecture}
 This section describes the architecture of the noff framework for capturing and processing.
 \subsection{Kernel Capture}
 The Capture module of noff has two shapes:the first one mainly support Multiple queue NICs which use a loadable kernel module and a user-level API stub,as shown in Figure \ref{fig:1}. In this case,Noff would initialize several threads which have same number towards NIC queues.
 Then PF\_RING kernel module transfers stream packets between queue and thread.
-\newline\indent The second one is mainly designed for NICs which only have one rx queue.this case is shown in Figure \ref{fig:2}. Programmer can choose a suitable shapes according to practical situation which Reflects the versatility of our capture module.
+\newline\indent The second one is mainly designed for NICs which only have one receive queue.This case is shown in Figure \ref{fig:2}. Programmer can choose a suitable shapes according to practical situation which Reflects the versatility of our capture module.
 
 \subsection{Processing Procedure}
-Noff uses a multi-layer framework. Each layer is independent and could include a number of modules.A module would offer one or more callback interface for upper layer module invoking. A stream packet's processing procedure is shown as Figure \ref{fig:3}.
+Noff uses a multi-layer framework. Each layer is independent and could include a number of modules.A module would offer one or more callback interface for upper layer module to invoke. A stream packet's processing procedure is shown as Figure \ref{fig:3}.
 Programmer can add a new module based on one existing layer by themselves.
 \begin{figure}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushleft
 \includegraphics[width=\textwidth]{./picture/Figure1.jpg}
 \caption{Multiqueue capture} 
 \label{fig:1}
 \end{minipage}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushright
 \includegraphics[width=\textwidth]{./picture/Figure2.jpg}
 \caption{single queue capture}
@@ -492,10 +490,9 @@ Programmer can add a new module based on one existing layer by themselves.
 \section{Noff Modules}
 This section describes the module of noff and shows how to build and register a new module.
 \subsection{Module Structure}
-Noff's module is a C++ class. Each module should be responsible for a corresponding procedure.A module use a public function to invoke another module's interface in lower layer to acquire the necessary data.Meanwhile,this module also needs to offer a callback interface for upper layer modules through bind and function feature.For instance,the capture module class is just simplify shown as Figure \ref{fig:4}. \newline\indent Figure \ref{fig:4} displays the nucleus functions of capture. vector$<$PacketCallback$>$ and vector$<$IpFragmentCall$>$ save all of the upper layer callback functions. Because these two vector are all private members. So programers should use \textbf{addPacketCallBack} and \textbf{addIpFragmentCallback} to operate these two private vectors.The \textbf{internalCallback} function is the key interface for lower layer modules to invoke.In conclusion,a valid module of noff should at least include a key interface for lower layer to invoke and at least one callback vector for upper layer modules to register callback function.
+Noff's module is a C++ class. Each module should be responsible for a corresponding procedure.A module use a public function to invoke another module's interface in lower layer to acquire the necessary data.Meanwhile,this module also needs to offer a callback interface for upper layer modules through the function template feature.For instance, a module class is just simplify shown as Figure \ref{fig:4}. \newline\indent Figure \ref{fig:4} displays the nucleus functions of the capture module. vector$<$PacketCallback$>$ and vector$<$IpFragmentCall$>$ save all of the upper layer callback functions. Because these two vector are all private members. So programers should use \textbf{addPacketCallBack} and \textbf{addIpFragmentCallback} to operate these two private vectors.The \textbf{internalCallback} function is the key interface for lower layer modules to invoke.In conclusion,a valid module of noff should at least include a key interface for lower layer to invoke and at least one callback vector for upper layer modules to register callback function.
 \subsection{Module Configuration}
-After accomplishing one module,it is necessary to configure this module into the main file. The DNS module configuration is shown as following code block.Because noff is a multi-thread platform. So we use thread local variable to allocate module instance for each thread.Using this method,we need not to consider thread synchronization issues.In a module code block,we need firstly acquire the instance reference.Then we 
-should register the upper callback interface to callback vector and register the key interface of this module to lower layer module.Finally,we should put our module function into \textbf{initInThread} function. In this way, this new module would work normally.
+After accomplishing one module,it is necessary to configure this module into the main file. The DNS module configuration is shown as following code block.As noff is a multi-thread platform,so we use the thread local variable to allocate module instance for each thread.Using this method,we need not to consider thread synchronization issues.In a module code block,we need firstly acquire the instance reference.Then we  should register the upper callback interface to callback vector and register the key interface of this module to lower layer module.Finally,we should put our module function into \textbf{initInThread} function. In this way, this new module would work normally.
 \begin{lstlisting}[language=C]
 void setDnsCounterInThread()
 {
@@ -528,21 +525,20 @@ void initInThread()
 \section{Implementation}
 We now give more details on the implementation of the noff monitoring framework.
 \subsection{Multi-Thread}
-Noff supports user-level multi-thread mechanism. Considering network platform compatibility,We offer two kinds of sharing scheme for programmers.The first one is built on NIC'RSS(receive-side scaling) scheme.
-\newline\indent Multiple queue NICs provide multiple transmit and receive queues, allowing packets received by the NIC to be assigned to one of its receive queues. Each receive queue is assigned to a separate interrupt; by routing each of those interrupts to different CPUs/cores, processing of the interrupt requests triggered by the network traffic received by a single NIC can be distributed among multiple cores, bringing additional performance improvements in interrupt handling. Usually, a NIC distributes incoming traffic between the receive queues using a hash function.
-\newline\indent The PF\_RING driver transfers the packets in receives queues to corresponding threads and the mapping of threads to CPU cores is practically one-to-one.
-The second multi-thread mechanism is built on user-level hash algorithm because some NICs may not support Multiple queues. In this scheme,a sharding module should compute the hash index for each captured packet which is in the light of the four tuple of packets And then the sharding module assigns each packet to the corresponding thread.The mapping of threads to CPU cores is also practically one-to-one.
-Through the multi-thread mechanism, noff has advanced the runtime performance effectively.
+Noff supports user-level multi-thread mechanism. Considering the compatibility of a network platform ,We offer two kinds of sharing scheme for programmers.The first one is built on NIC's RSS(receive-side scaling) scheme.
+\newline\indent Multiple queue NICs provide multiple transmit and receive queues, allowing packets received by the NIC to be assigned to one of its receive queues. Each receive queue is assigned to a separate interrupt; by routing each of those interrupts to different cores. Processing of the interrupt requests triggered by the network traffic received by a single NIC can be distributed among multiple cores, bringing additional performance improvements in interrupt handling. Usually, a NIC distributes incoming traffic between the receive queues using a hash function.The first mechanism is accomplished through the PF\_RING driver.
+\newline\indent The second multi-thread mechanism is built on user-level hash algorithm because some NICs may not support Multiple queues. In this scheme,a sharding module should compute the hash index for each captured packet which is in the light of the four tuples of this packet and then assigns it to the corresponding thread.The mapping of threads to CPU cores is likewise practically one-to-one.
+\newline\indent Through the multi-thread mechanism, noff has advanced the runtime performance effectively.
 \subsection{Powerful TCP Reassembly}
-TCP reassembly is a resource-consuming procedure. Thus it is central to optimize this procedure. noff develops a stream reassemble module based on Libnids' reassemble module.Differently,noff has overcome much weakness of Libnids'.We then describe this from three aspects:
+TCP reassembly is a resource-consuming procedure. Thus it is central to optimize this procedure. noff develops a new stream reassemble module based on Libnids.We then describe this from three aspects:
 \subsubsection{Thread Safety}
-Libnids' stream reassembly module is accomplished by C language and it has many global variables which may cause thread unsafety.Whereas noff's stream reassembly module is accomplished by C++ and all of the variables is capsulated which ensure that each thread is assigned an independent copy.
+Libnids' stream reassembly module is accomplished by C language and it has many global variables which may cause thread unsafety.Whereas noff's stream reassembly module is accomplished by C++ and all of the variables are capsulated which ensures that each thread is assigned an independent copy.
 \subsubsection{Timing wheel}
-The connection flood is a shared network attack.If a TCP connection only has the SYN packets without the FIN packets,this connection will not be erased until the stream buffer size exceeds the threshold.In this case,the new stream may have no chance to be processed. Actually,a number of situations can finally cause this case. Libnids' reassembly module has no ability to conquer with this circumstance.Referring to the current problems,noff adopts a Keep-alive timer solution.Once a connection is established,the connection's Keep-alive timer should be also established simultaneously.
-\newline\indent In order to manage the timer effectively, we adopt a wheel like data structure\cite{IEEE:10} which can flexibly insert a new stream timer and erase the dead timers which have expired.A simple schematic diagram is given in Figure \ref{fig:5}. In this Figure there are totally seven time slots.Each slot represents one second and it is corresponding to a bucket which stores stream objects.When the system startups,the clock pointer should move to the next slot per second,Meanwhile the 0 slot would be dropped which means the stream objects in it also need to be dropped.And a new tail slot would be created.Through this way we would knock out some dead streams.
-\newline\indent we need not only to knock out the dead streams but also to update the alive streams.In order to conveniently accomplish this function.we make use the reference
-count feature of the smart pointer.When we need to update a stream's timestamp,we just need to insert a shared\_ptr object of this stream into the current time slot bucket which means the reference count of this stream has an increment.Then when we drop a time slot bucket and the objects in it,only if a stream's reference count become zero,this stream could be erased from stream hash table.Through this way,we can easily find out that we can just update a stream by just inserting a objects which is attractive.
-\newline\indent Noff uses circle queue to accomplish the wheel timer and set the number of the time slot to be 60 which means once a stream has no data in exchange for 60 seconds,it would become a dead stream and would be erased.
+The connection flood is a common network attack.If a TCP connection only has the SYN packets without the FIN packets,this connection will not be erased until the stream buffer size exceeds the threshold.In this case,the new stream may have no chance to be processed. Actually,a number of situations can finally cause this case. Libnids' reassembly engine has no ability to conquer with this circumstance.So referring to the current problems,noff adopts an innovative Keep-alive timer solution.Once a connection is established,the connection's keep-alive timer should be also established simultaneously.
+\newline\indent In order to manage the timer effectively, we adopt a wheel like data structure\cite{Varghese} which can flexibly insert a new stream timer and erase a dead timer which has expired.A simple schematic diagram is given in Figure \ref{fig:5}. In this Figure there are totally seven time slots.Each slot represents one second and it is corresponding to a bucket which stores stream objects.When the system startups,the clock pointer should move to the next slot per second,Meanwhile the 0 slot would be dropped which means the stream objects in it also need to be dropped.And a new tail slot would be created.Through this way noff could knock out some dead streams.
+\newline\indent noff need not only to knock out the dead streams but also to update the alive streams.In order to conveniently accomplish this function.we make use the reference count feature of the smart pointer.When we need to update a stream's timestamp,we just need to insert a shared\_ptr object of this stream into the current time slot bucket which means the reference count of this stream has an increment.When we drop a time slot bucket and the objects in it,only if a stream's reference count become zero,this stream could be erased from stream hash table drastically.Through this way,we can easily find out that we can just update a stream by just inserting a shared pointer of this stream.
+\newline\indent Furthermore, through this mechanism,programmers can also set priority for one stream.A simple method is that they can update one stream continuously whether the stream has in exchange packets or not.
+\newline\indent Noff uses circle queue to accomplish the wheel timer and set the number of the time slot to be 60 which means once a stream has no data in exchange for 60 seconds,it would become a dead stream and would be then erased.
 
 \begin{figure}[htbp]
   \centering
@@ -551,7 +547,7 @@ count feature of the smart pointer.When we need to update a stream's timestamp,w
   \label{fig:5}
 \end{figure}
 \subsubsection{Memory Optimization}
-The TCP reassembly module needs to resort TCP fragments.So it needs to prestore packet data which is meant by a large number of dynamic memory allocation. Libnids not only prestore packets but also store the completed packets between client and server. This scheme has a palpable short slab that there are too many memory allocations and copies which could bring huge overload.
+The TCP reassembly module needs to resort TCP fragments.So it needs to prestore packet data which is meant by a large number of dynamic memory allocation. Libnids not only prestore packets but also store the completed packets between client and server. This scheme has a palpable short slab that there are too many memory allocations and copies which could bring huge overhead.
 \newline\indent Basically, noff has abandon the scheme that the reassembly module needs to store the completed packets. Because though libnids offer this ability. The upper applications also have to store the TCP stream data by themselves again. After optimizing this procedure,the performance of stream reassembly module has been improved explicitly.
 And further more,noff uses TCMalloc to optimize the memory allocation speed.
 \subsection{Packets Filter}
@@ -567,11 +563,11 @@ worker2: 16902 - Dispatcher.cc:48
 20170528 08:44:57.964405Z 128795 INFO
 worker3: 20434 - Dispatcher.cc:48
 \end{lstlisting}
-\indent Our implementation is based on intel 520 XR2 NIC and BCM5720 NIC.XR2 is a modern 10GbE NIC supporting multiqueue and RSS while BCM5720 is a 1000MbE NIC which only supports single recieve queue.Noff can be effectively used with both these NICs. Actually according to our test,Noff can be executed on nearly all NICs platform.
+\indent Our implementation is based on an intel 520 XR2 NIC and a BCM5720 NIC.The XR2 is a modern 10GbE NIC supporting multiple queues and RSS while the BCM5720 is a 1000MbE NIC which only supports single receive queue.Noff can be effectively used with both these NICs. Actually according to our test,Noff can be executed on nearly all NICs platform.
 
 \subsection{Callback Interface}
 Noff use C++ bind/function feature to actualize callback interface.Bind scheme generates a forwarding call wrapper for a member function of a class.Calling this wrapper is equivalent to invoking a member function with some of its arguments bound to args. 
-All of module classes in noff should register their member function through this way.Once one function has been registered in a module.This module would store it into a vector.When a specific event happens,all call wrappers in the vector should be invoked one by one.This scheme is described vividly in Figure \ref{fig:6}.
+All module classes in noff should register their member function through this way.Once one function has been registered in a module.This module would store it into a vector.When a specific event happens,all call wrappers in the vector should be invoked one by one.This scheme is described vividly in Figure \ref{fig:6}.
 \newline\indent Actually this scheme is similar to Observer Pattern.
 \begin{figure}[htbp]
   \centering
@@ -580,7 +576,7 @@ All of module classes in noff should register their member function through this
   \label{fig:6}
 \end{figure}
 \subsection{Packet Handle}
-An application may be interested in receiving both reassembled streams, as well as their individual packets to detect TCP-level attacks.Different from traditional methods or to extract meritorious information from network traffic data. Because of callback interface in each module,noff's interfaces only offer necessary for each module rather than delivering the original packets from the network.If an application indicates that it needs original,in noff it needs to register with the capture module's interface.
+An application may be interested in receiving both reassembled streams, as well as their individual packets to detect TCP-level attacks.Different from traditional methods or to extract meritorious information from network traffic data. Because of callback interface in each module,noff's interfaces only offer necessary data for each module rather than delivering the original packets from the network.If an application indicates that it needs original data,in noff it needs to register with the capture module's interface.
 
 \section{Experimental Evaluation}
 We experimentally evaluate the performance and feature of noff, comparing it to other similar libraries, for common monitoring tasks, such as flow statistics export and http parser, while replaying a trace of real network traffic at different rates.
@@ -588,21 +584,21 @@ We experimentally evaluate the performance and feature of noff, comparing it to 
 \subsection{Experimental Environment}
 
 \subsubsection{Hardware}
-In this paper,we use a testbed comprising two PCs interconnected directly through an Intel 520XR2 10GbE NIC and MT26448 10GbE NIC.Intel NIX is used as a stream capture while MY26448 NIC is used for traffic generation. The two PCs are both equipped with one eight-core Intel Xeon 1.8GHz CPUs with 10MB L2 cache, 4GB RAM.Both PCs run 64-bit Ubuntu Linux(kernel version 4.4.50).
+In this paper,we use a testbed comprising two PCs interconnected directly through an Intel 520XR2 10GbE NIC and MT26448 10GbE NIC.Intel NIC is used as a stream capturer while MY26448 NIC is used for traffic generation. The two PCs are both equipped with one eight-core Intel Xeon 1.8GHz CPUs with 10MB L2 cache, 4GB RAM.Both PCs run 64-bit Ubuntu Linux(kernel version 4.4.50).
 \subsubsection{Traffic}
-To evaluate stream reassembly implementations with real traffic,we replay a pcap file which comes from campus network having totally two million TCP packets.
+To evaluate stream reassembly implementations with real traffic,we replay a traffic file which comes from campus network having totally two million TCP packets.
 \subsubsection{Parameters}
-We compare noff with the following libraries: (\uppercase\expandafter{\romannumeral1})Libnids v1.25[]
-(\uppercase\expandafter{\romannumeral2})and the Stream5 preprocessor of Snort v3.0.0. Libnids and Snort rely on Libpcap\cite{IEEE:13}, which uses the PF\_PACKET socket for packet capture on Linux while noff use PF\_PACKET directly .In our experiments, the size of this buffer is set to 512MB, and the buffer size for reassembled streams is set to 500000 for all of these three library.The other parameters for Libnids and Snort are all default.  
+We compare noff with the following libraries: (\uppercase\expandafter{\romannumeral1})Libnids v1.25\cite{Libnids}
+(\uppercase\expandafter{\romannumeral2})and the Stream5 preprocessor of Snort v3.0.0. Libnids and Snort rely on Libpcap\cite{McCanne}, which uses the PF\_PACKET socket for packet capture on Linux while noff use PF\_PACKET directly .In our experiments, the size of this buffer is set to 512MB, and the buffer size for reassembled streams is set to 500000 for all of these three library.The other parameters for Libnids and Snort are all default.  
 We set the keep-alive timer of noff as 60 seconds.As we replay the traffic data circularly,an inactivity timeout of 60 seconds is a reasonable choice.
 \begin{figure}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushleft
 \includegraphics[width=\textwidth]{./picture/Figure6.jpg}
 \caption{Packet loss} 
 \label{fig:7}
 \end{minipage}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushright
 \includegraphics[width=\textwidth]{./picture/Figure7.jpg}
 \caption{CPU Utilization}
@@ -615,13 +611,13 @@ In this experiment, noff only assembles TCP fragment module without advanced pro
 \newline\indent Figures \ref{fig:7},Figure \ref{fig:8} present the percentage of dropped packets,the average Cpu utilizing of the monitoring application on a single core. We use the tool tcpreplay to replay the static network traffic at the rate from 500Mbit/s to 6Gbit/s.The result Figures indicate that The Libnids starts losing packets when the traffic rate exceeds 3Gbit/s. It is becasue that when the traffic rate exceeds 3Gbit/s, the CPU utilization of the Libnids exceeds 90\%. Also the Snort performs slightly better than Libnids,But it still start to losing packets when the traffic rate exceeds 3Gbit/s. At this time, the CPU utilization of the Snort also exceeds 90\%.Because the Snort and Libnids have similar stream processing schemes. 
 \newline\indent Noff performs explicitly better than the Libnids and Snort.It starts to drop packets after the traffic rate exceeds 4Gbits/s.It is critical to figure that The Libnids,The Snort and the noff are all based on single-core PF\_RING driver.Which means that noff has better user-level optimization. In my opinion,the key optimization is the memory allocation.
 \begin{figure}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushleft
 \includegraphics[width=\textwidth]{./picture/Figure8.jpg}
 \caption{Cpu utilization} 
 \label{fig:9}
 \end{minipage}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushright
 \includegraphics[width=\textwidth]{./picture/Figure9.jpg}
 \caption{Http Packet Number}
@@ -640,13 +636,13 @@ In the Implementation section,we declare that the PF\_RING driver can support mu
 \newline\indent Our 10GBE NIC can support 8 receive queues. So we would compare the performance of noff's TCP reassemble on single thread with the performance on multiple thread. Actually, multiple thread does not bring too much additional overhead.Each thread should burden the same procedure. Through NIC's RSS,each thread would only process one-eighth streams compared with the single thread scheme.
 \newline\indent The Figure \ref{fig:11} and Figure \ref{fig:12} indicate the experiment result which include the performance of noff on two cases.From the result, we can clearly see that the single thread case starts to drop packets when the traffic rate exceeds 4Gbit/s while the multiple thread case drops no packet even the the traffic rate exceeds 6Gbit/s.We can find the reason from \ref{fig:11}.when the traffic rate exceeds 4Gbit/s,the single core utilization arrives the threshold(100\%) which means noff arrives its limitation on single core.But on multiple core platform,noff can use several cores to improve its processing ability.The utilization of it can exceed 100\%.This experiment prove that by multiple thread scheme,noff can obtain better performance extremely.
 \begin{figure}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushleft
 \includegraphics[width=\textwidth]{./picture/Figure10.jpg}
 \caption{Cpu utilization} 
 \label{fig:11}
 \end{minipage}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushright
 \includegraphics[width=\textwidth]{./picture/Figure11.jpg}
 \caption{Http Packet Number}
@@ -661,13 +657,13 @@ would compare the noff's performance in the two cases:with TCMalloc and without 
 \newline\indent The Figure \ref{fig:13} and Figure \ref{fig:14} indicate the result of experiment.From the Figure \ref{fig:13},we can see that the CPU utilization is slightly higher when we don't use TCMalloc. So the consequence is that when we don't use TCMalloc noff starts to drop packets when the network traffic exceeds 3.5Gbit/s.This check experiment prove that TCMalloc can improve the memory copy performance to a certain extent.
 \newline\indent The full name of TCMalloc is thread cache malloc. One of the key  exploring spots is the thread local cache. In multiple thread environment,noff's module classes are all thread cache variables. So In this environment,the TCMalloc tool is a much better memory allocation optimization method.
 \begin{figure}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushleft
 \includegraphics[width=\textwidth]{./picture/Figure12.jpg}
 \caption{Packet loss} 
 \label{fig:13}
 \end{minipage}
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.495\linewidth}
 \flushright
 \includegraphics[width=\textwidth]{./picture/Figure13.jpg}
 \caption{Cpu utilization}
@@ -806,13 +802,13 @@ Scap is a novel capture library whose most attractive distinguishing characteris
 
 \subsection{Multicore Architecture}
 Multicore architecture creates a new epoch in research on parallel processing.Many researches have been done.For example Low-level CPU optimizations like those of
-L2-cache is one practical solution for fast parallelization\cite{IEEE:15} and Chen et al. \cite{IEEE:16} perform parallel processing of Big Data but optimize resource use.Marat Zhanikeev\cite{IEEE:17} proposed a lockfree method to speed up capture process.Scap\cite{IEEE:12} is another kernel-level based optimization method.Noff adopt a lockfree user-level multi-thread platform.
+L2-cache is one practical solution for fast parallelization\cite{Zhanikeev} and Chen et al. \cite{MapReduce} perform parallel processing of Big Data but optimize resource use.Marat Zhanikeev\cite{Zhanikeev} proposed a lockfree method to speed up capture process.Scap\cite{Papadogiannakis} is another kernel-level based optimization method.Noff adopt a lockfree user-level multi-thread platform.
 \subsection{TCP Stream Reassembly}
-Libnids\cite{IEEE:11} and Stream5\cite{IEEE:18} perform TCP reassembly based on the emulation of a network stack. Noff propose a more high-performance reassembly engine which optimize the drawbacks of libnids.
+Libnids\cite{Libnids} and Stream5\cite{Sturges} perform TCP reassembly based on the emulation of a network stack. Noff propose a more high-performance reassembly engine which optimize the drawbacks of libnids.
 
 
 \subsection{Structure Optimization}
-Luca Deri\cite{IEEE:19} proposed a method based on polling frame to optimize the packets processing procedure.Yeim-Kuan\cite{IEEE:20} make use of hierarchical binary prefix search scheme to process packets.Noff uses flexible callback interface to help programmers to build flexible structure easily.
+Luca Deri\cite{Deri} proposed a method based on polling frame to optimize the packets processing procedure.Yeim-Kuan\cite{Chang} make use of hierarchical binary prefix search scheme to process packets.Noff uses flexible callback interface to help programmers to build flexible structure easily.
 
 
 \section{Conclusion}
@@ -860,65 +856,66 @@ We would like to thank the junior student GuangQian Peng.He has offered huge con
 % (used to reserve space for the reference number labels box)
 \begin{thebibliography}{1}
 
-  \bibitem{IEEE:1}
+  \bibitem{Liu}
   Liu, Duo, et al. "High-performance packet classification algorithm for many-core and multithreaded network processor." International Conference on Compilers, Architecture and Synthesis for Embedded Systems ACM, 2006:334-344.
   
-  \bibitem{IEEE:2}
+  \bibitem{Antonello}
   Antonello, Rafael, et al. "Deep packet inspection tools and techniques in commodity platforms: Challenges and trends." Journal of Network \& Computer Applications 35.6(2012):1863-1878.
   
-  \bibitem{IEEE:3}
+  \bibitem{Qiao}
   Qiao, Siyi, et al. "Network recorder and player: FPGA-based network traffic capture and replay." International Conference on Field-Programmable Technology IEEE, 2015.
   
-  \bibitem{IEEE:4}
+  \bibitem{Ali}
   Ali, Sardar, et al. "On mitigating sampling-induced accuracy loss in traffic anomaly detection systems." ACM SIGCOMM Computer Communication Review 40.3(2010):4-16.
   
-  \bibitem{IEEE:5}
+  \bibitem{PFRING}
   PF\_RING. http://www.ntop.org/products/packet-capture/pf\_ring/
 
+  \bibitem{snort}
+  Sourcefire vulnerability research team (vrt). http://www.
+snort.org/vrt/.
 
-  \bibitem{IEEE:6}
+  \bibitem{Evans}
   J. Evans. Scalable memory allocation using jemalloc. 2011. http://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919.
   
-  \bibitem{IEEE:7}
+  \bibitem{Threading}
   Intel Threading Building Blocks. https://software.intel.com/en-us/intel-tbb/
   
-  \bibitem{IEEE:8}
+  \bibitem{Sangho}
   Lee, Sangho, T. Johnson, and E. Raman. "Feedback directed optimization of TCMalloc." The Workshop on Memory Systems PERFORMANCE and Correctness ACM, 2014:3.
   
-  \bibitem{IEEE:9}
+  \bibitem{Server}
   Intel Server Adapters. Receive Side Scaling on Intel Network Adapters. http://www.intel.com/support/network/adapter/pro100/sb/cs-027574.htm.
   
-  \bibitem{IEEE:10}
+  \bibitem{Varghese}
   Varghese, G., and A. Lauck. "Hashed and hierarchical timing wheels: efficient data structures for implementing a timer facility." IEEE/ACM Transactions on Networking 5.6(2002):824-834.
   
-  \bibitem{IEEE:11}
+  \bibitem{Libnids}
   Libnids. http://libnids.sourceforge.net/.
   
-  \bibitem{IEEE:12}
+  \bibitem{Papadogiannakis}
   Papadogiannakis, Antonis, M. Polychronakis, and E. P. Markatos. "Scap: stream-oriented network traffic capture and analysis for high-speed networks." Conference on Internet Measurement Conference ACM, 2013:441-454.
   
-  \bibitem{IEEE:13}
+  \bibitem{McCanne}
   S. McCanne, C. Leres, and V. Jacobson. Libpcap. http://www.tcpdump.org/. Lawrence Berkeley Laboratory.
   
-  \bibitem{IEEE:14}
+  \bibitem{Machdi}
   Machdi, Imam, T. Amagasa, and H. Kitagawa. "Executing parallel TwigStack algorithm on a multi-core system." International Conference on Information Integration and Web-Based Applications \& Services ACM, 2009:176-184.
   
-  \bibitem{IEEE:15}
+  \bibitem{Zhanikeev}
   Zhanikeev, Marat. A lockfree shared memory design for high-throughput multicore packet traffic capture. Wiley-Interscience, 2014.
   
-  \bibitem{IEEE:16}
+  \bibitem{MapReduce}
   Chen R, Chen H, Zang B. Tiled-MapReduce: optimizing resource usages of data-parallel applications on multicore with tiling. In 19th International Conference on Parallel Architectures and Compilation Techniques (PACT), 2010;523–534.
+ 
   
-  \bibitem{IEEE:17}
-  Zhanikeev, Marat. A lockfree shared memory design for high-throughput multicore packet traffic capture. Wiley-Interscience, 2014.
-  
-  \bibitem{IEEE:18}
+  \bibitem{Sturges}
   J. Novak and S. Sturges. Target-Based TCP Stream Reassembly. http://assets.sourcefire.com/snort/developmentpapers/stream5-model-Aug032007.pdf, 2007.
   
-  \bibitem{IEEE:19}
+  \bibitem{Deri}
   L Deri,NSPA Via,B Km,LL Figuretta.Improving passive packet capture: beyond device polling.Proceedings of Sane;2004.
   
-  \bibitem{IEEE:20}
+  \bibitem{Chang}
   Chang, Yeim Kuan, and F. C. Kuo. "Towards optimized packet processing for multithreaded network processor." International Conference on High PERFORMANCE Switching and Routing IEEE, 2010:127-132.
   
   
