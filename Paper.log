@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2016.9.15)  8 JUN 2017 20:18
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2016.9.15)  9 JUN 2017 14:57
 entering extended mode
 **Paper.tex
 (G:\git-project\Paper\Paper.tex
@@ -282,29 +282,29 @@ Requested font "ptmrc7t" at 10.0pt
 [1
 
 
-]
+] [2]
 File: ./picture/Figure1.jpg Graphic file (type QTm)
  <use  "./picture/Figure1.jpg" >
 File: ./picture/Figure2.jpg Graphic file (type QTm)
- <use  "./picture/Figure2.jpg" > [2]
+ <use  "./picture/Figure2.jpg" >
 File: ./picture/Figure3.jpg Graphic file (type QTm)
 
 <use  "./picture/Figure3.jpg" >
-Overfull \hbox (6.0pt too wide) in paragraph at lines 485--486
+Overfull \hbox (6.0pt too wide) in paragraph at lines 488--489
  [][] 
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 493.
+(Font)              <7> on input line 496.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 493.
+(Font)              <5> on input line 496.
 (E:\CTEX\UserData\tex\latex\listings\lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (E:\CTEX\UserData\tex\latex\listings\lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 496.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 499.
 
 
 (E:\CTEX\MiKTeX\tex\latex\psnfss\ot1pcr.fd
@@ -323,51 +323,49 @@ File: ./picture/Figure6.jpg Graphic file (type QTm)
 
 <use  "./picture/Figure6.jpg" >
 File: ./picture/Figure7.jpg Graphic file (type QTm)
- <use  "./picture/Figure7.jpg" >
+ <use  "./picture/Figure7.jpg" > [5]
 File: ./picture/Figure8.jpg Graphic file (type QTm)
 
 <use  "./picture/Figure8.jpg" >
 File: ./picture/Figure9.jpg Graphic file (type QTm)
- <use  "./picture/Figure9.jpg" > [5]
+ <use  "./picture/Figure9.jpg" >
 File: ./picture/Figure10.jpg Graphic file (type QTm)
 
 <use  "./picture/Figure10.jpg" >
 File: ./picture/Figure11.jpg Graphic file (type QTm)
- <use  "./picture/Figure11.jpg" >
+ <use  "./picture/Figure11.jpg" > [6]
 File: ./picture/Figure12.jpg Graphic file (type QTm)
 
 <use  "./picture/Figure12.jpg" >
 File: ./picture/Figure13.jpg Graphic file (type QTm)
- <use  "./picture/Figure13.jpg" > [6]
+ <use  "./picture/Figure13.jpg" >
 File: ./picture/Figure14.jpg Graphic file (type QTm)
 
 <use  "./picture/Figure14.jpg" >
 File: ./picture/Figure15.jpg Graphic file (type QTm)
  <use  "./picture/Figure15.jpg" > [7]
-Underfull \hbox (badness 1838) in paragraph at lines 829--830
-\OT1/ptm/m/n/10 Peng.He has of-fered huge con-tri-bu-tion to this re-search
- []
+Missing character: There is no “ in font ptmr7t!
+Missing character: There is no ” in font ptmr7t!
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 879--880
+Underfull \hbox (badness 10000) in paragraph at lines 885--886
 []\OT1/ptm/m/n/8 J. E-van-s. S-cal-able mem-o-ry al-lo-ca-tion us-ing je-mal-lo
 c. 2011.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 879--880
+Underfull \hbox (badness 10000) in paragraph at lines 885--886
 \OT1/ptm/m/n/8 http://www.facebook.com/notes/facebook-engineering/scalable-memo
 ry-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 900--901
+Underfull \hbox (badness 10000) in paragraph at lines 906--907
 []\OT1/ptm/m/n/8 S. M-c-Canne, C. Leres, and V. Ja-cob-son. Libp-cap.
  []
 
 Missing character: There is no – in font ptmr7t!
 
-Underfull \hbox (badness 3219) in paragraph at lines 913--914
+Underfull \hbox (badness 3219) in paragraph at lines 919--920
 []\OT1/ptm/m/n/8 J. No-vak and S. S-turges. Target-Based TCP Stream Re-assem-
  []
 
@@ -384,10 +382,10 @@ Before submitting the final camera ready copy, remember to:
 
 [8] (G:\git-project\Paper\Paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3394 strings out of 430478
- 49845 string characters out of 3191502
- 143376 words of memory out of 3000000
- 6539 multiletter control sequences out of 15000+200000
+ 3396 strings out of 430478
+ 49860 string characters out of 3191502
+ 146345 words of memory out of 3000000
+ 6541 multiletter control sequences out of 15000+200000
  25572 words of font info for 56 fonts, out of 3000000 for 9000
  17 hyphenation exceptions out of 8191
  26i,9n,51p,1088b,1039s stack positions out of 5000i,500n,10000p,200000b,50000s
